@@ -1,0 +1,83 @@
+/* Premium Glassmorphism 404 Styling */
+
+.not-found-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-box {
+  width: 400px;
+  padding: 40px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Glowing 404 text with gradient */
+.error-code {
+  font-size: 110px;
+  margin: 0;
+  font-weight: 900;
+  background: linear-gradient(135deg, #f43f5e, #ec4899, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.5));
+}
+
+.not-found-box h2 {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  color: white;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+}
+
+.error-description {
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Premium gradient button with transition and hover shadow */
+.back-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.5);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+
+/* Subtle floating micro-animation for the card */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
