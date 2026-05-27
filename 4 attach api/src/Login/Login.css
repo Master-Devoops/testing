@@ -95,3 +95,24 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(236, 72, 153, 0.4);
 }
+
+/* Error Message */
+.error-message {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Disabled State */
+.login-box input:disabled,
+.login-box button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
