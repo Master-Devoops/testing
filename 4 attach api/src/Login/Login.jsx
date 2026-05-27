@@ -72,7 +72,11 @@ function Login() {
           disabled={loading}
         />
 
-        <Link to="/forgotpassword" state={{ fromLogin: true }} className="forgot-password">
+        <Link
+          to="/forgotpassword"
+          state={{ fromLogin: true }}
+          className="forgot-password"
+        >
           Forgot Password?
         </Link>
 

@@ -1,126 +1,126 @@
 /* Background */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b, #312e81);
-    min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #312e81);
+  min-height: 100vh;
 }
 
 /* Main Container */
 .website-container {
-    min-height: 100vh;
-    color: white;
+  min-height: 100vh;
+  color: white;
 }
 
 /* Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 60px;
 }
 
 /* Logo */
 .logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: white;
-    letter-spacing: 1px;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
 }
 
 /* Nav Buttons */
 .nav-buttons {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 /* Common Button Style */
 .nav-buttons button {
-    padding: 10px 22px;
-    border: none;
-    border-radius: 12px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    font-weight: 600;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 600;
 }
 
 /* Login Button */
 .login-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .login-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Register Button */
 .register-btn {
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
-    color: white;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: white;
 }
 
 .register-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.4);
 }
 
 /* Hero Section */
 .hero-section {
-    height: calc(100vh - 90px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  height: calc(100vh - 90px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 /* Glass Card */
 .hero-box {
-    width: 700px;
-    text-align: center;
-    padding: 50px;
-    border-radius: 24px;
+  width: 700px;
+  text-align: center;
+  padding: 50px;
+  border-radius: 24px;
 
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 /* Heading */
 .hero-box h1 {
-    font-size: 52px;
-    margin-bottom: 20px;
+  font-size: 52px;
+  margin-bottom: 20px;
 }
 
 /* Paragraph */
 .hero-box p {
-    font-size: 18px;
-    color: #d1d5db;
-    line-height: 1.7;
-    margin-bottom: 35px;
+  font-size: 18px;
+  color: #d1d5db;
+  line-height: 1.7;
+  margin-bottom: 35px;
 }
 
 /* Get Started Button */
 .get-started-btn {
-    padding: 14px 34px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
+  padding: 14px 34px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .get-started-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.4);
 }
