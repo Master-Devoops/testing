@@ -3,256 +3,181 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
+  // =========================
+  // NAVIGATION
+  // =========================
+
+  const navigate = useNavigate();
+
+  // =========================
+  // STATES
+  // =========================
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  // =========================
+  // LOGIN FUNCTION
+  // =========================
+
+  const handleLogin = async () => {
+    // CLEAR OLD MESSAGES
+    setSuccessMessage("");
+    setErrorMessage("");
 
     // =========================
-    // NAVIGATION
+    // EMPTY FIELD CHECK
     // =========================
 
-    const navigate = useNavigate();
+    if (email.trim() === "" || password.trim() === "") {
+      setErrorMessage("⚠️ Please Fill All Fields");
+
+      return;
+    }
 
     // =========================
-    // STATES
+    // START LOADING
     // =========================
 
-    const [email, setFullname] = useState("");
-    const [password, setPassword] = useState("");
+    setLoading(true);
 
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    try {
+      // =========================
+      // API CALL
+      // =========================
 
-    const [loading, setLoading] = useState(false);
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
 
-    // =========================
-    // LOGIN FUNCTION
-    // =========================
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-    const handleLogin = async () => {
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-        // CLEAR OLD MESSAGES
-        setSuccessMessage("");
-        setErrorMessage("");
+      // CONVERT RESPONSE TO JSON
+      const data = await response.json();
 
-        // =========================
-        // EMPTY FIELD CHECK
-        // =========================
+      // =========================
+      // SUCCESS LOGIN
+      // =========================
 
-        if (
-            email.trim() === "" ||
-            password.trim() === ""
-        ) {
+      if (response.ok && data.success) {
+        // SAVE TOKEN
+        localStorage.setItem("token", data.token);
 
-            setErrorMessage(
-                "⚠️ Please Fill All Fields"
-            );
+        // SAVE USER DATA
+        localStorage.setItem("user", JSON.stringify(data.user));
 
-            return;
+        // SUCCESS MESSAGE
+        setSuccessMessage("🎉 Login Successful");
+
+        // REDIRECT TO DASHBOARD
+        setTimeout(() => {
+          navigate("/dashboard", {
+            state: {
+              fromLogin: true,
+            },
+          });
+        }, 1500);
+      }
+
+      // =========================
+      // LOGIN ERRORS
+      // =========================
+      else {
+        // USER NOT FOUND
+        if (data.code === "USER_NOT_FOUND") {
+          setErrorMessage("⚠️ User Not Found");
         }
 
-        // =========================
-        // START LOADING
-        // =========================
-
-        setLoading(true);
-
-        try {
-
-            // =========================
-            // API CALL
-            // =========================
-
-            const response = await fetch(
-                "http://localhost:3000/login",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-
-                    body: JSON.stringify({
-                        email,
-                        password,
-                    }),
-                }
-            );
-
-            // CONVERT RESPONSE TO JSON
-            const data = await response.json();
-
-            // =========================
-            // SUCCESS LOGIN
-            // =========================
-
-            if (response.ok && data.success) {
-
-                // SAVE TOKEN
-                localStorage.setItem(
-                    "token",
-                    data.token
-                );
-
-                // SAVE USER DATA
-                localStorage.setItem(
-                    "user",
-                    JSON.stringify(data.user)
-                );
-
-                // SUCCESS MESSAGE
-                setSuccessMessage(
-                    "🎉 Login Successful"
-                );
-
-                // REDIRECT TO DASHBOARD
-                setTimeout(() => {
-
-                    navigate(
-                        "/dashboard",
-                        {
-                            state: {
-                                fromLogin: true,
-                            },
-                        }
-                    );
-
-                }, 1500);
-
-            }
-
-            // =========================
-            // LOGIN ERRORS
-            // =========================
-
-            else {
-
-                // USER NOT FOUND
-                if (data.code === "USER_NOT_FOUND") {
-
-                    setErrorMessage(
-                        "⚠️ User Not Found"
-                    );
-                }
-
-                // INVALID PASSWORD
-                else if (data.code === "INVALID_PASSWORD") {
-
-                    setErrorMessage(
-                        "⚠️ Incorrect Password"
-                    );
-                }
-
-                // DEFAULT ERROR
-                else {
-
-                    setErrorMessage(
-                        "⚠️ Login Failed"
-                    );
-                }
-            }
-
+        // INVALID PASSWORD
+        else if (data.code === "INVALID_PASSWORD") {
+          setErrorMessage("⚠️ Incorrect Password");
         }
 
-        // =========================
-        // SERVER ERROR
-        // =========================
-
-        catch (error) {
-
-            console.log(error);
-
-            setErrorMessage(
-                "⚠️ Server Error"
-            );
+        // DEFAULT ERROR
+        else {
+          setErrorMessage("⚠️ Login Failed");
         }
+      }
+    } catch (error) {
+      // =========================
+      // SERVER ERROR
+      // =========================
 
-        // =========================
-        // STOP LOADING
-        // =========================
+      console.log(error);
 
-        finally {
+      setErrorMessage("⚠️ Server Error");
+    } finally {
+      // =========================
+      // STOP LOADING
+      // =========================
 
-            setLoading(false);
-        }
-    };
+      setLoading(false);
+    }
+  };
 
-    // =========================
-    // JSX UI
-    // =========================
+  // =========================
+  // JSX UI
+  // =========================
 
-    return (
+  return (
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Login</h2>
 
-        <div className="login-container">
+        {/* SUCCESS MESSAGE */}
+        {successMessage && (
+          <div className="success-message">{successMessage}</div>
+        )}
 
-            <div className="login-box">
+        {/* ERROR MESSAGE */}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-                <h2>Login</h2>
+        {/* EMAIL INPUT */}
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={loading}
+        />
 
-                {/* SUCCESS MESSAGE */}
-                {
-                    successMessage && (
-                        <div className="success-message">
-                            {successMessage}
-                        </div>
-                    )
-                }
+        {/* PASSWORD INPUT */}
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          disabled={loading}
+        />
 
-                {/* ERROR MESSAGE */}
-                {
-                    errorMessage && (
-                        <div className="error-message">
-                            {errorMessage}
-                        </div>
-                    )
-                }
+        {/* FORGOT PASSWORD */}
+        <Link
+          to="/forgotpassword"
+          state={{ fromLogin: true }}
+          className="forgot-password"
+        >
+          Forgot Password?
+        </Link>
 
-                {/* EMAIL INPUT */}
-                <input
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={(e) =>
-                        setFullname(e.target.value)
-                    }
-                    disabled={loading}
-                />
-
-                {/* PASSWORD INPUT */}
-                <input
-                    type="password"
-                    placeholder="Enter Password"
-                    value={password}
-                    onChange={(e) =>
-                        setPassword(e.target.value)
-                    }
-                    disabled={loading}
-                />
-
-                {/* FORGOT PASSWORD */}
-                <Link
-                    to="/forgotpassword"
-                    state={{ fromLogin: true }}
-                    className="forgot-password"
-                >
-                    Forgot Password?
-                </Link>
-
-                {/* LOGIN BUTTON */}
-                <button
-                    onClick={handleLogin}
-                    disabled={loading}
-                >
-
-                    {
-                        loading
-                            ? "Logging in..."
-                            : "Login"
-                    }
-
-                </button>
-
-            </div>
-
-        </div>
-    );
+        {/* LOGIN BUTTON */}
+        <button onClick={handleLogin} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
