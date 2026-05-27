@@ -14,7 +14,7 @@ function Login() {
     // STATES
     // =========================
 
-    const [email, setEmail] = useState("");
+    const [email, setFullname] = useState("");
     const [password, setPassword] = useState("");
 
     const [successMessage, setSuccessMessage] = useState("");
@@ -210,7 +210,7 @@ function Login() {
                     placeholder="Enter Email"
                     value={email}
                     onChange={(e) =>
-                        setEmail(e.target.value)
+                        setFullname(e.target.value)
                     }
                     disabled={loading}
                 />
