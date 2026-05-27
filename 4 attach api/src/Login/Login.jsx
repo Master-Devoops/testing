@@ -3,89 +3,256 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
-    if (!username.trim() || !password.trim()) {
-      setError("Please fill in both username and password.");
-      return;
-    }
+    // =========================
+    // NAVIGATION
+    // =========================
 
-    setError("");
-    setLoading(true);
+    const navigate = useNavigate();
 
-    try {
-      const response = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username.trim(),
-          password: password,
-          expiresInMins: 30,
-        }),
-        credentials: "include",
-      });
+    // =========================
+    // STATES
+    // =========================
 
-      const data = await response.json();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-      if (!response.ok) {
-        throw new Error(data.message || "Invalid username or password");
-      }
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-      // Store response details
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("user", JSON.stringify(data));
+    const [loading, setLoading] = useState(false);
 
-      // Redirect to Dashboard passing the security flow state check
-      navigate("/dashboard", { state: { fromLogin: true } });
-    } catch (err) {
-      setError(err.message || "Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    // =========================
+    // LOGIN FUNCTION
+    // =========================
 
-  return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Login</h2>
+    const handleLogin = async () => {
 
-        {error && <div className="error-message">{error}</div>}
+        // CLEAR OLD MESSAGES
+        setSuccessMessage("");
+        setErrorMessage("");
 
-        <input
-          type="text"
-          placeholder="Enter Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          disabled={loading}
-        />
+        // =========================
+        // EMPTY FIELD CHECK
+        // =========================
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={loading}
-        />
+        if (
+            email.trim() === "" ||
+            password.trim() === ""
+        ) {
 
-        <Link
-          to="/forgotpassword"
-          state={{ fromLogin: true }}
-          className="forgot-password"
-        >
-          Forgot Password?
-        </Link>
+            setErrorMessage(
+                "⚠️ Please Fill All Fields"
+            );
 
-        <button onClick={handleLogin} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </div>
-    </div>
-  );
+            return;
+        }
+
+        // =========================
+        // START LOADING
+        // =========================
+
+        setLoading(true);
+
+        try {
+
+            // =========================
+            // API CALL
+            // =========================
+
+            const response = await fetch(
+                "http://localhost:3000/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        email,
+                        password,
+                    }),
+                }
+            );
+
+            // CONVERT RESPONSE TO JSON
+            const data = await response.json();
+
+            // =========================
+            // SUCCESS LOGIN
+            // =========================
+
+            if (response.ok && data.success) {
+
+                // SAVE TOKEN
+                localStorage.setItem(
+                    "token",
+                    data.token
+                );
+
+                // SAVE USER DATA
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(data.user)
+                );
+
+                // SUCCESS MESSAGE
+                setSuccessMessage(
+                    "🎉 Login Successful"
+                );
+
+                // REDIRECT TO DASHBOARD
+                setTimeout(() => {
+
+                    navigate(
+                        "/dashboard",
+                        {
+                            state: {
+                                fromLogin: true,
+                            },
+                        }
+                    );
+
+                }, 1500);
+
+            }
+
+            // =========================
+            // LOGIN ERRORS
+            // =========================
+
+            else {
+
+                // USER NOT FOUND
+                if (data.code === "USER_NOT_FOUND") {
+
+                    setErrorMessage(
+                        "⚠️ User Not Found"
+                    );
+                }
+
+                // INVALID PASSWORD
+                else if (data.code === "INVALID_PASSWORD") {
+
+                    setErrorMessage(
+                        "⚠️ Incorrect Password"
+                    );
+                }
+
+                // DEFAULT ERROR
+                else {
+
+                    setErrorMessage(
+                        "⚠️ Login Failed"
+                    );
+                }
+            }
+
+        }
+
+        // =========================
+        // SERVER ERROR
+        // =========================
+
+        catch (error) {
+
+            console.log(error);
+
+            setErrorMessage(
+                "⚠️ Server Error"
+            );
+        }
+
+        // =========================
+        // STOP LOADING
+        // =========================
+
+        finally {
+
+            setLoading(false);
+        }
+    };
+
+    // =========================
+    // JSX UI
+    // =========================
+
+    return (
+
+        <div className="login-container">
+
+            <div className="login-box">
+
+                <h2>Login</h2>
+
+                {/* SUCCESS MESSAGE */}
+                {
+                    successMessage && (
+                        <div className="success-message">
+                            {successMessage}
+                        </div>
+                    )
+                }
+
+                {/* ERROR MESSAGE */}
+                {
+                    errorMessage && (
+                        <div className="error-message">
+                            {errorMessage}
+                        </div>
+                    )
+                }
+
+                {/* EMAIL INPUT */}
+                <input
+                    type="email"
+                    placeholder="Enter Email"
+                    value={email}
+                    onChange={(e) =>
+                        setEmail(e.target.value)
+                    }
+                    disabled={loading}
+                />
+
+                {/* PASSWORD INPUT */}
+                <input
+                    type="password"
+                    placeholder="Enter Password"
+                    value={password}
+                    onChange={(e) =>
+                        setPassword(e.target.value)
+                    }
+                    disabled={loading}
+                />
+
+                {/* FORGOT PASSWORD */}
+                <Link
+                    to="/forgotpassword"
+                    state={{ fromLogin: true }}
+                    className="forgot-password"
+                >
+                    Forgot Password?
+                </Link>
+
+                {/* LOGIN BUTTON */}
+                <button
+                    onClick={handleLogin}
+                    disabled={loading}
+                >
+
+                    {
+                        loading
+                            ? "Logging in..."
+                            : "Login"
+                    }
+
+                </button>
+
+            </div>
+
+        </div>
+    );
 }
 
 export default Login;

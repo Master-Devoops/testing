@@ -1,118 +1,250 @@
-/* Premium Glassmorphism Login UI */
+/* =========================
+   BODY
+========================= */
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b, #312e81);
+  font-family: Arial, sans-serif;
+
+  background: linear-gradient(
+      135deg,
+      #0f172a,
+      #1e293b,
+      #312e81
+  );
+
   height: 100vh;
 }
 
-/* Center Container */
+/* =========================
+ MAIN CONTAINER
+========================= */
+
 .login-container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: 100vh;
 }
 
-/* Login Card */
+/* =========================
+ LOGIN BOX
+========================= */
+
 .login-box {
-  width: 350px;
+
+  width: 380px;
+
   padding: 35px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-}
 
-/* Heading */
-.login-box h2 {
+  border-radius: 20px;
+
+  background: rgba(
+      255,
+      255,
+      255,
+      0.08
+  );
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(
+      255,
+      255,
+      255,
+      0.2
+  );
+
+  box-shadow: 0 8px 32px rgba(
+      0,
+      0,
+      0,
+      0.3
+  );
+
   text-align: center;
-  margin-bottom: 28px;
-  color: white;
-  font-size: 30px;
-  letter-spacing: 1px;
 }
 
-/* Inputs */
+/* =========================
+ TITLE
+========================= */
+
+.login-box h2 {
+
+  color: white;
+
+  margin-bottom: 25px;
+
+  font-size: 32px;
+}
+
+/* =========================
+ INPUTS
+========================= */
+
 .login-box input {
+
   width: 100%;
+
   padding: 14px;
+
   margin-bottom: 18px;
+
   border: none;
+
   outline: none;
+
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
+
   font-size: 15px;
+
+  background: rgba(
+      255,
+      255,
+      255,
+      0.12
+  );
+
+  color: white;
+
   box-sizing: border-box;
-  transition: 0.3s ease;
 }
 
-/* Placeholder */
+/* INPUT PLACEHOLDER */
+
 .login-box input::placeholder {
+
   color: #d1d5db;
 }
 
-/* Input Focus */
+/* INPUT FOCUS */
+
 .login-box input:focus {
-  border: 1px solid #8b5cf6;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+
+  border: 1px solid #60a5fa;
 }
 
-/* Forgot Password */
+/* =========================
+ FORGOT PASSWORD
+========================= */
+
 .forgot-password {
+
+  display: block;
+
   text-align: right;
-  margin-bottom: 22px;
+
+  margin-bottom: 20px;
+
+  color: #93c5fd;
+
+  text-decoration: none;
+
   font-size: 14px;
-  color: #c4b5fd;
-  cursor: pointer;
-  transition: 0.3s ease;
 }
+
+/* HOVER */
 
 .forgot-password:hover {
-  color: #ffffff;
+
+  text-decoration: underline;
 }
 
-/* Button */
+/* =========================
+ BUTTON
+========================= */
+
 .login-box button {
+
   width: 100%;
+
   padding: 14px;
+
   border: none;
+
   border-radius: 12px;
-  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+
+  background: #2563eb;
+
   color: white;
+
   font-size: 16px;
+
   font-weight: bold;
+
   cursor: pointer;
-  transition: 0.3s ease;
+
+  transition: 0.3s;
 }
 
-/* Button Hover */
+/* BUTTON HOVER */
+
 .login-box button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.4);
+
+  background: #1d4ed8;
+
+  transform: scale(1.02);
 }
 
-/* Error Message */
-.error-message {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.5);
-  color: #fca5a5;
-  padding: 10px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  text-align: center;
-}
+/* DISABLED BUTTON */
 
-/* Disabled State */
-.login-box input:disabled,
 .login-box button:disabled {
-  opacity: 0.65;
+
+  opacity: 0.7;
+
   cursor: not-allowed;
-  transform: none !important;
-  box-shadow: none !important;
+}
+
+/* =========================
+ SUCCESS MESSAGE
+========================= */
+
+.success-message {
+
+  background: rgba(
+      34,
+      197,
+      94,
+      0.2
+  );
+
+  color: #86efac;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid #22c55e;
+
+  font-weight: bold;
+}
+
+/* =========================
+ ERROR MESSAGE
+========================= */
+
+.error-message {
+
+  background: rgba(
+      239,
+      68,
+      68,
+      0.2
+  );
+
+  color: #fca5a5;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid #ef4444;
+
+  font-weight: bold;
 }
