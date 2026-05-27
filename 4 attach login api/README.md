@@ -1,16 +1,37 @@
-# React + Vite
+# 4 Attach Login API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This folder connects the auth UI to backend API endpoints.
 
-Currently, two official plugins are available:
+## What happens in this folder
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Keeps the multi-page auth flow (Website, Login, Register, Forgot Password, Dashboard, NotFound).
+- Integrates frontend auth forms with backend endpoints using `fetch`.
+- Sends login requests to `http://localhost:3000/login`.
+- Sends register requests to `http://localhost:3000/register`.
+- Stores login data in `localStorage` after successful login.
 
-## React Compiler
+## Routes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `/` -> Website
+- `/login` -> Login
+- `/register` -> Register
+- `/forgotpassword` -> Forgot Password
+- `/dashboard` -> Dashboard
+- `*` -> NotFound
 
-## Expanding the ESLint configuration
+## Run this project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Important note
+
+For API-based login/register to work, the `Backend` server must be running and MySQL must be configured.
+
+## Main files
+
+- `src/Login/Login.jsx`: login API call and user feedback handling.
+- `src/Register/Register.jsx`: registration validations and API call.
+- `src/App.jsx`: route wiring for all pages.

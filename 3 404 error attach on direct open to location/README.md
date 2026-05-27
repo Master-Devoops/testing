@@ -1,16 +1,32 @@
-# React + Vite
+# 3 404 Error Attach on Direct Open to Location
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This folder extends the auth UI flow and adds a 404 fallback page.
 
-Currently, two official plugins are available:
+## What happens in this folder
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Adds multiple pages: Website landing, Login, Register, Forgot Password, Dashboard.
+- Adds a catch-all route (`*`) that shows a custom `NotFound` page.
+- Improves navigation flow when users open invalid URLs directly.
+- Keeps this stage frontend-only (no API integration yet).
 
-## React Compiler
+## Routes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `/` -> Website
+- `/login` -> Login
+- `/register` -> Register
+- `/forgotpassword` -> Forgot Password
+- `/dashboard` -> Dashboard
+- `*` -> NotFound
 
-## Expanding the ESLint configuration
+## Run this project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Main files
+
+- `src/App.jsx`: full route map and wildcard 404 route.
+- `src/NotFound/NotFound.jsx`: custom 404 UI.
+- `src/Website/Website.jsx`: landing page with Login/Register navigation.
