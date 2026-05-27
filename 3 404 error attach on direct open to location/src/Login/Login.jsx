@@ -31,7 +31,7 @@ function Login() {
         />
 
         {/* <p className="forgot-password">Forgot Password?</p> */}
-        <Link to="/forgotpassword" className="forgot-password">
+        <Link to="/forgotpassword" state={{ fromLogin: true }} className="forgot-password">
           Forgot Password?
         </Link>
 
